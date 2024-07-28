@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
   <style>
     #content {
-      margin-top: 80px; 
+      margin-top: 80px;
     }
     .home-image {
       max-width: 100%;
@@ -33,22 +34,16 @@
     .suggestion:hover {
       background-color: #f0f0f0;
     }
-
+    
+    .w3-bar-block {
+      display: none; 
+    }
+    .w3-bar-block.show {
+      display: block; 
+    }
     @media (max-width: 600px) {
       .w3-bar .w3-right {
-        display: none;
-      }
-      .w3-bar .w3-bar-item {
         display: block;
-      }
-      .w3-bar .w3-bar-item.w3-button {
-        display: none;
-      }
-      .w3-bar .w3-bar-item.w3-button.w3-hide-small {
-        display: block;
-      }
-      #content {
-        margin-top: 100px;
       }
     }
   </style>
@@ -60,21 +55,14 @@
     <a href="#" class="w3-bar-item w3-button" id="home-link"><b>API</b> Project</a>
 
     
-    <div class="w3-right w3-hide-small">
-      <a href="#" class="w3-bar-item w3-button" id="api1-link">Weather</a>
-      <a href="#" class="w3-bar-item w3-button" id="api2-link">NASA APOD</a>
-      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-    </div>
-
-    
-    <a href="javascript:void(0);" class="w3-bar-item w3-button w3-hide-large w3-hide-medium w3-right" onclick="toggleNav()">
+    <a href="javascript:void(0);" class="w3-bar-item w3-button w3-right" onclick="toggleNav()">
       <i class="fa fa-bars"></i>
     </a>
 
     
-    <div id="mobile-nav" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium">
-      <a href="#" class="w3-bar-item w3-button" id="mobile-api1-link">Weather</a>
-      <a href="#" class="w3-bar-item w3-button" id="mobile-api2-link">NASA APOD</a>
+    <div id="navbar-menu" class="w3-bar-block w3-hide">
+      <a href="#" class="w3-bar-item w3-button" id="api1-link">Weather</a>
+      <a href="#" class="w3-bar-item w3-button" id="api2-link">NASA APOD</a>
       <a href="#contact" class="w3-bar-item w3-button">Contact</a>
     </div>
   </div>
@@ -105,20 +93,22 @@
 <script src="index.js"></script>
 <script>
   function toggleNav() {
-    const nav = document.getElementById('mobile-nav');
+    const nav = document.getElementById('navbar-menu');
     if (nav.classList.contains('w3-hide')) {
       nav.classList.remove('w3-hide');
+      nav.classList.add('show');
     } else {
       nav.classList.add('w3-hide');
+      nav.classList.remove('show');
     }
   }
 
-  document.getElementById('mobile-api1-link').addEventListener('click', () => {
+  document.getElementById('api1-link').addEventListener('click', () => {
     loadWeatherPage();
     toggleNav();
   });
 
-  document.getElementById('mobile-api2-link').addEventListener('click', () => {
+  document.getElementById('api2-link').addEventListener('click', () => {
     loadNasaData();
     toggleNav();
   });
@@ -128,6 +118,9 @@
     document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   });
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
