@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('home-link').addEventListener('click', () => {
     content.innerHTML = `
       <h1>Welcome to Our Project!</h1>
-      <p>This is the home page.</p>
+      <p>Welcome to your one-stop hub for all things weather and space! Discover the latest weather updates for any city in the world and explore the wonders of the universe with NASA's Astronomy Picture of the Day. Whether you're planning your day or dreaming about the cosmos, our site has got you covered. Dive in and start your journey through the skies!</p>
       <img src="https://images.unsplash.com/photo-1604437998688-6bb58dc963b4?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Home Image" class="home-image">
     `;
   });
