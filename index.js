@@ -156,3 +156,4 @@ function displayNasaData(data) {
 
   content.innerHTML += `<p>${data.explanation}</p>`;
 }
+
