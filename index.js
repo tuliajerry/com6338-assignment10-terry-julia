@@ -17,13 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadNasaData();
   });
 
-  
   document.querySelector('a[href="#contact"]').addEventListener('click', (event) => {
     event.preventDefault();
     document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   });
 
- 
   document.getElementById('home-link').click();
 });
 
@@ -33,6 +31,7 @@ function loadWeatherPage() {
     <div class="search-bar">
       <input type="text" id="city-input" placeholder="Enter city name" class="w3-input w3-border">
       <button class="w3-button w3-black w3-section" id="search-btn">Search</button>
+      <div class="suggestions" id="suggestions"></div>
     </div>
     <div id="weather-data"></div>
   `;
@@ -42,13 +41,21 @@ function loadWeatherPage() {
     fetchWeatherData(city);
   });
 
-  
-  fetchWeatherData('London');
+  document.getElementById('city-input').addEventListener('input', () => {
+    const query = document.getElementById('city-input').value;
+    if (query.length > 2) {
+      fetchCitySuggestions(query);
+    } else {
+      document.getElementById('suggestions').innerHTML = '';
+    }
+  });
+
+  fetchWeatherData('Chicago');
 }
 
 function fetchWeatherData(city) {
   const apiKey = '0e0e21f3afcbca34775d8619ee15da31';
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 
   fetch(url)
     .then(response => response.json())
@@ -69,10 +76,43 @@ function displayWeatherData(data) {
   const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   weatherDataDiv.innerHTML = `
     <h1>Weather in ${city}</h1>
-    <p>Temperature: ${data.main.temp} °C</p>
+    <p>Temperature: ${data.main.temp} °F</p>
     <p>Weather: ${data.weather[0].description}</p>
     <img src="${iconUrl}" alt="${data.weather[0].description}" class="weather-icon">
   `;
+}
+
+function fetchCitySuggestions(query) {
+  const apiKey = '0e0e21f3afcbca34775d8619ee15da31';
+  const url = `https://api.openweathermap.org/data/2.5/find?q=${query}&type=like&appid=${apiKey}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log('City suggestions fetched:', data);
+      displayCitySuggestions(data);
+    })
+    .catch(error => {
+      console.error('Error fetching city suggestions:', error);
+      document.getElementById('suggestions').innerHTML = '<p>Error loading suggestions.</p>';
+    });
+}
+
+function displayCitySuggestions(data) {
+  const suggestionsDiv = document.getElementById('suggestions');
+  suggestionsDiv.innerHTML = '';
+
+  data.list.forEach(city => {
+    const suggestionDiv = document.createElement('div');
+    suggestionDiv.classList.add('suggestion');
+    suggestionDiv.textContent = `${city.name}, ${city.sys.country}`;
+    suggestionDiv.addEventListener('click', () => {
+      document.getElementById('city-input').value = city.name;
+      document.getElementById('suggestions').innerHTML = '';
+      fetchWeatherData(city.name);
+    });
+    suggestionsDiv.appendChild(suggestionDiv);
+  });
 }
 
 function fetchNasaData() {
