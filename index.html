@@ -20,6 +20,19 @@
     .search-bar {
       margin-bottom: 20px;
     }
+    .suggestions {
+      border: 1px solid #ccc;
+      border-top: none;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .suggestion {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .suggestion:hover {
+      background-color: #f0f0f0;
+    }
     
     @media (max-width: 600px) {
       .w3-bar .w3-right {
@@ -33,7 +46,6 @@
 </head>
 <body>
 
-
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
     <a href="#" class="w3-bar-item w3-button" id="home-link"><b>API</b> Project</a>
@@ -46,11 +58,9 @@
   </div>
 </div>
 
-
 <div class="w3-content w3-padding" style="max-width:1564px" id="content">
  
 </div>
-
 
 <div class="w3-container w3-padding-32" id="contact">
   <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Contact</h3>
@@ -66,13 +76,12 @@
   </form>
 </div>
 
-
 <footer class="w3-center w3-black w3-padding-16">
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
-
 
 <script src="index.js"></script>
 
 </body>
 </html>
+
